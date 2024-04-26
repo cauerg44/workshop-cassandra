@@ -10,7 +10,7 @@ public class Department {
 
 	@PrimaryKey
 	private UUID id;
-	private String name;;
+	private String name;
 	
 	public Department() {
 	}
