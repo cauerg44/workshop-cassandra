@@ -24,14 +24,25 @@ public class DepartmentService {
 	}
 	
 	public DepartmentDTO findById(UUID id) {
-		Optional<Department> result = repository.findById(id);
-		Department entity = result.orElseThrow(() -> new ResourceNotFoundException("Id not found."));
+		Department entity = getById(id);
 		return new DepartmentDTO(entity);
+	}
+	
+	public Department getById(UUID id) {
+		Optional<Department> result = repository.findById(id);
+		return result.orElseThrow(() -> new ResourceNotFoundException("Id not found."));
 	}
 	
 	public DepartmentDTO insert(DepartmentDTO dto) {
 		Department entity = new Department();
 		entity.setId(UUID.randomUUID());
+		copyDtoToEntity(dto, entity);
+		entity = repository.save(entity);
+		return new DepartmentDTO(entity);
+	}
+	
+	public DepartmentDTO update(UUID id, DepartmentDTO dto) {
+		Department entity = getById(id);
 		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
 		return new DepartmentDTO(entity);
