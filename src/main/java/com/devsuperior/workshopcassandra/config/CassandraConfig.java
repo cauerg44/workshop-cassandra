@@ -58,6 +58,6 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
 
 	@Override
 	public String[] getEntityBasePackages() {
-		return new String[] { "com.devsuperior.workshopcassandra.model.entities;" };
+		return new String[] { "com.devsuperior.workshopcassandra.model.entities" };
 	}
 }
