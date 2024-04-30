@@ -1,5 +1,6 @@
 package com.devsuperior.workshopcassandra.services;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,5 +26,10 @@ public class ProductService {
 	public Product getById(UUID id) {
 		Optional<Product> result = repository.findById(id);
 		return result.orElseThrow(() -> new ResourceNotFoundException("Id not found."));
+	}
+	
+	public List<ProductDTO> findByDepartment(String department) {
+		List<Product> list = repository.findByDepartment(department);
+		return list.stream().map(x -> new ProductDTO(x)).toList();
 	}
 }
